@@ -77,7 +77,7 @@ function randomIndex(max: number, random: () => Uint32Array): number {
   if (max <= 0) throw new Error("max must be positive");
   const range = Math.floor(0x100000000 / max) * max; // largest multiple of max <= 2^32
   for (;;) {
-    const value = random()[0];
+    const value = random()[0]!;
     if (value < range) return value % max;
   }
 }
