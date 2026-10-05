@@ -109,18 +109,18 @@ export function generatePassword(
 
   // Guarantee one character from each enabled pool.
   for (const pool of pools) {
-    chars.push(pool[randomIndex(pool.length, random)]);
+    chars.push(pool[randomIndex(pool.length, random)]!);
   }
 
   // Fill the remainder from the combined pool.
   while (chars.length < options.length) {
-    chars.push(all[randomIndex(all.length, random)]);
+    chars.push(all[randomIndex(all.length, random)]!);
   }
 
   // Fisher–Yates shuffle (unbiased via rejection sampling).
   for (let i = chars.length - 1; i > 0; i--) {
     const j = randomIndex(i + 1, random);
-    [chars[i], chars[j]] = [chars[j], chars[i]];
+    [chars[i], chars[j]] = [chars[j]!, chars[i]!];
   }
 
   return chars.join("");
